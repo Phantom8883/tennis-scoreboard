@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Теннисный счёт</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'matches/style.css' %}">
+</head>
+<body>
+    <div class="scoreboard">
+        <div class="team" id="team1">
+            <h2>Команда 1</h2>
+            <div class="score-games">0</div>
+            <div class="score-points">0</div>
+            <button class="point-btn" data-team="team1">+ Очко</button>
+        </div>
+        <div class="team" id="team2">
+            <h2>Команда 2</h2>
+            <div class="score-games">0</div>
+            <div class="score-points">0</div>
+            <button class="point-btn" data-team="team2">+ Очко</button>
+        </div>
+    </div>
+
+    <script>
+        const matchId = {{ match_id }};
+
+        async function updateScore() {
+            const response = await fetch(`/api/match/${matchId}/`);
+            const data = await response.json();
+            document.querySelector('#team1 .score-games').innerText = data.score.team1_games;
+            document.querySelector('#team2 .score-games').innerText = data.score.team2_games;
+            document.querySelector('#team1 .score-points').innerText = data.score.points_display.split(' : ')[0];
+            document.querySelector('#team2 .score-points').innerText = data.score.points_display.split(' : ')[1];
+        }
+
+        document.querySelectorAll('.point-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const winner = btn.dataset.team;
+                await fetch(`/api/match/${matchId}/point/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ winner: winner })
+                });
+                await updateScore();
+            });
+        });
+
+        updateScore();
+        setInterval(updateScore, 1000); // обновление каждую секунду
+    </script>
+</body>
+</html>

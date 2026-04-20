@@ -1,0 +1,68 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e5a3a, #0e2a1a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.scoreboard {
+    display: flex;
+    gap: 4rem;
+    background: rgba(0,0,0,0.7);
+    padding: 2rem 4rem;
+    border-radius: 3rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+}
+
+.team {
+    text-align: center;
+    color: white;
+    background: #2c2c2c;
+    padding: 2rem;
+    border-radius: 2rem;
+    min-width: 250px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.team h2 {
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.score-games {
+    font-size: 4rem;
+    font-weight: bold;
+    background: #111;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+}
+
+.score-points {
+    font-size: 3rem;
+    font-weight: bold;
+    background: #1e3a5f;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    margin: 1rem 0;
+}
+
+.point-btn {
+    background: #f39c12;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.point-btn:hover {
+    background: #e67e22;
+    transform: scale(1.02);
+}
